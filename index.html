@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151d29">
+  <meta name="description" content="A tiny 90-second escape room aboard the last train to Platform 0.">
+  <title>Platform 0 — The Last Train</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Platform Zero home"><span class="brand-symbol" aria-hidden="true">✳</span><span>PLATFORM<br><b>ZERO</b></span></a>
+    <div class="top-meta"><span>AFTER HOURS SERVICE</span><span class="meta-dot">·</span><span>CAR 09</span></div>
+    <button class="restart-button" id="restart-button" type="button">RESTART <span aria-hidden="true">↻</span></button>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <div><p class="eyebrow"><span class="eyebrow-line"></span> A 90-SECOND ESCAPE ROOM</p><h1>The last train<br>to <em>nowhere.</em></h1></div>
+      <div class="intro-side"><p>The carriage has stopped between stations. The door needs a three-digit code. The conductor left one note.</p><span class="rule-chip">3 CLUES &nbsp;·&nbsp; 1 DOOR &nbsp;·&nbsp; 90 SECONDS</span></div>
+    </section>
+
+    <section class="game-layout" aria-label="Escape room game">
+      <div class="room-shell">
+        <div class="room-heading"><span><i class="status-light"></i> THE NIGHT LINE <b>/</b> CARRIAGE 09</span><span class="room-time-label">23:59:12</span></div>
+        <div class="room-scene" id="room-scene">
+          <div class="window-frame" aria-hidden="true"><div class="night-sky"><span class="moon"></span><i class="sky-star star-a">✦</i><i class="sky-star star-b">✧</i><i class="sky-star star-c">·</i><span class="far-hill"></span><span class="near-hill"></span><span class="window-lamp"></span></div><span class="window-bar"></span></div>
+          <div class="wall-seam seam-one" aria-hidden="true"></div><div class="wall-seam seam-two" aria-hidden="true"></div>
+          <div class="wall-clock" aria-hidden="true"><span class="clock-pin"></span><span class="clock-hand hand-hour"></span><span class="clock-hand hand-minute"></span><span class="clock-mark mark-twelve">XII</span><span class="clock-mark mark-three">III</span><span class="clock-mark mark-six">VI</span><span class="clock-mark mark-nine">IX</span></div>
+          <div class="seat" aria-hidden="true"><span class="seat-back"></span><span class="seat-cushion"></span><span class="seat-leg leg-one"></span><span class="seat-leg leg-two"></span></div>
+          <div class="side-table" aria-hidden="true"><span class="table-top"></span><span class="table-leg"></span><span class="paper-note">THE<br>ORDER</span></div>
+          <div class="music-box" aria-hidden="true"><span class="box-lid"></span><span class="box-body"></span><span class="box-key key-a"></span><span class="box-key key-b"></span><span class="box-key key-c"></span><span class="box-star">✦</span></div>
+          <div class="suitcase" aria-hidden="true"><span class="case-handle"></span><span class="case-body"></span><span class="case-strap"></span><span class="case-lock">✳</span></div>
+          <div class="train-door" aria-hidden="true"><span class="door-window"></span><span class="door-plate">EXIT<br>CAR 09</span><span class="door-knob"></span></div>
+          <div class="floor-line" aria-hidden="true"></div>
+
+          <button class="hotspot hotspot-clock" type="button" data-object="clock" aria-label="Inspect the brass clock"><span class="hotspot-ring"></span><span class="hotspot-label">BRASS CLOCK</span></button>
+          <button class="hotspot hotspot-music" type="button" data-object="music" aria-label="Inspect the music box"><span class="hotspot-ring"></span><span class="hotspot-label">MUSIC BOX</span></button>
+          <button class="hotspot hotspot-case" type="button" data-object="case" aria-label="Inspect the suitcase"><span class="hotspot-ring"></span><span class="hotspot-label">SUITCASE</span></button>
+          <button class="hotspot hotspot-door" id="door-button" type="button" aria-label="Try the carriage exit"><span class="hotspot-ring"></span><span class="hotspot-label">THE EXIT</span></button>
+
+          <div class="start-cover" id="start-cover"><div class="cover-ticket"><span>ONE WAY</span><span>PLATFORM 0</span></div><p class="cover-overline">LAST DEPARTURE · 00:00</p><h2>Somewhere,<br>there is a <em>door.</em></h2><p class="cover-copy">Read the conductor’s note. Find three room numbers. Put them in the right order and make your stop.</p><button class="button button-gold" id="start-button" type="button">Start the clock <span aria-hidden="true">↗</span></button><span class="cover-foot">YOUR 90 SECONDS BEGIN ON BOARD.</span></div>
+          <div class="scene-caption"><span>NO STOPS BETWEEN HERE AND THE END.</span><span>✳</span></div>
+        </div>
+      </div>
+
+      <aside class="casefile" aria-labelledby="case-title">
+        <div class="case-header"><div><p class="eyebrow">CASE FILE <span class="case-no">001</span></p><h2 id="case-title">A note from<br>the conductor</h2></div><div class="timer" role="timer" aria-label="Time remaining"><span id="timer-value">01:30</span><small>LEFT</small></div></div>
+        <blockquote>“Keep time. Find a tune. Take the journey. The room number on each, in that order, is your way out.”</blockquote>
+        <div class="case-rule"><span>YOUR THREE NUMBERS</span><span id="progress-label">0 / 3 FOUND</span></div>
+        <ol class="code-slots" id="code-slots" aria-label="Collected room numbers"><li data-slot="0">—</li><li data-slot="1">—</li><li data-slot="2">—</li></ol>
+        <p class="case-feedback" id="case-feedback" aria-live="polite">Start the clock, then inspect the objects in the note’s order.</p>
+        <div class="case-actions"><button class="hint-button" id="hint-button" type="button"><span>?</span> I need a hint <b id="hint-count">3 LEFT</b></button><button class="restart-text" id="restart-text" type="button">Start over ↻</button></div>
+        <div class="case-stamp"><span>PROPERTY OF</span><b>THE NIGHT<br>CONDUCTOR</b><i>✳</i></div>
+      </aside>
+    </section>
+
+    <footer class="page-footer"><span>IF YOU CAN READ THIS, YOU’RE STILL ON THE TRAIN.</span><span>DESIGNED FOR THE CURIOUS &nbsp; · &nbsp; 01 / 01</span></footer>
+  </main>
+
+  <dialog class="game-dialog" id="game-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-panel" id="object-panel">
+      <button class="dialog-close" type="button" aria-label="Close">×</button>
+      <p class="eyebrow"><span class="eyebrow-line"></span> OBJECT FOUND</p>
+      <span class="object-icon" id="object-icon" aria-hidden="true">◷</span>
+      <h2 id="dialog-title">Brass clock</h2>
+      <p class="object-copy" id="object-copy"></p>
+      <div class="room-number"><span>ROOM NUMBER</span><b id="object-number">4</b></div>
+      <p class="dialog-feedback" id="dialog-feedback" aria-live="polite"></p>
+      <button class="button button-gold take-button" id="take-number" type="button">Add this number <span aria-hidden="true">↗</span></button>
+    </div>
+    <div class="dialog-panel keypad-panel" id="keypad-panel" hidden>
+      <button class="dialog-close" type="button" aria-label="Close">×</button>
+      <p class="eyebrow"><span class="eyebrow-line"></span> CARRIAGE DOOR</p>
+      <span class="keypad-icon" aria-hidden="true">▦</span>
+      <h2 id="keypad-title">Enter the<br>departure code.</h2>
+      <p class="object-copy">Three room numbers. In the order from the conductor’s note.</p>
+      <form class="keypad-form" id="keypad-form"><label for="code-input">THREE-DIGIT CODE</label><input id="code-input" name="code" type="text" inputmode="numeric" pattern="[0-9]{3}" maxlength="3" autocomplete="off" placeholder="•••" aria-describedby="code-feedback"><button class="button button-gold" type="submit">Try the door <span aria-hidden="true">↗</span></button></form>
+      <p class="dialog-feedback" id="code-feedback" aria-live="polite"></p>
+    </div>
+    <div class="dialog-panel ending-panel" id="ending-panel" hidden>
+      <span class="ending-spark" aria-hidden="true">✳</span><p class="eyebrow">LAST STOP · PLATFORM 0</p>
+      <h2 id="ending-title">You made<br>your <em>stop.</em></h2>
+      <p class="object-copy" id="ending-copy"></p>
+      <div class="end-ticket"><span>ARRIVAL</span><b>RIGHT ON TIME</b><i>✳</i></div>
+      <button class="button button-gold" id="play-again" type="button">Ride again <span aria-hidden="true">↻</span></button>
+    </div>
+    <div class="dialog-panel ending-panel" id="timeout-panel" hidden>
+      <span class="ending-spark dim-spark" aria-hidden="true">☾</span><p class="eyebrow">THE NIGHT LINE KEEPS MOVING</p>
+      <h2>Missed the<br><em>stop.</em></h2>
+      <p class="object-copy">The train will circle back. Take a breath, remember the note, and try the carriage again.</p>
+      <button class="button button-gold" id="try-again" type="button">Board again <span aria-hidden="true">↻</span></button>
+    </div>
+  </dialog>
+</body>
+</html>
